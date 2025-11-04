@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact Us - Politeknik Seberang Perai</title>
+
+  <!-- Font Awesome for icons (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    /* Simple styling - you boleh pindah ke external CSS jika mahu */
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      margin:0;
+      padding:0;
+      display:flex;
+      justify-content:center;
+      background:#f4f6f8;
+    }
+    .container{
+      width:900px;
+      max-width:95%;
+      background:white;
+      margin:40px 0;
+      border-radius:10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding:20px;
+      text-align:center;
+    }
+
+    /* Navbar */
+    .navbar{
+      display:flex;
+      justify-content:space-around;
+      gap:10px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .nav-button{
+      padding:10px 16px;
+      border-radius:8px;
+      border:1px solid #ddd;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:all 0.2s ease;
+      background:#fff;
+    }
+
+    /* Logo */
+    #logo{
+      width:150px;
+      height:150px;
+      object-fit:contain;
+      margin:8px auto 14px;
+      display:block;
+    }
+
+    /* Contact details */
+    .contact-details{
+      text-align:left;
+      max-width:650px;
+      margin:0 auto;
+      padding:12px;
+      border-radius:8px;
+      border:1px dashed #e0e0e0;
+      background:#fafafa;
+      display:block;
+    }
+    .contact-row{ margin:8px 0; }
+
+    /* Social */
+    .socials{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+    }
+    .social{
+      padding:8px 12px;
+      border-radius:8px;
+      border:1px solid #ddd;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:transform 0.18s ease;
+    }
+
+    /* Toggle button */
+    #toggle-contact{
+      margin-top:12px;
+      padding:8px 12px;
+      border-radius:6px;
+      cursor:pointer;
+    }
+
+    /* small responsiveness */
+    @media (max-width:520px){
+      .navbar{ gap:6px; }
+      #logo{ width:110px; height:110px; }
+      .container{ padding:14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <div class="nav-button" id="about"><i class="fa fa-info-circle"></i> About Us</div>
+      <div class="nav-button" id="services"><i class="fa fa-briefcase"></i> Our Services</div>
+      <div class="nav-button" id="registration"><i class="fa fa-clipboard-list"></i> Registration Form</div>
+      <div class="nav-button" id="contactNav"><i class="fa fa-envelope"></i> Contact Us</div>
+    </div>
+
+    <!-- LOGO (letakkan fail logo di folder yang sama, contoh: psp_logo.png) -->
+    <img id="logo" src="psp.logo.png" alt="Politeknik Seberang Perai Logo">
+
+    <!-- Contact summary + toggle -->
+    <div style="margin-top:8px">
+      <button id="toggle-contact">Show / Hide Contact Details</button>
+    </div>
+
+    <!-- CONTACT DETAILS  -->
+    <div class="contact-details" id="contact-details">
+      <div class="contact-row"><strong>WhatsApp:</strong> <a href="https://wa.me/60175025973" target="_blank">Send a WhatsApp message</a></div>
+      <div class="contact-row"><strong>Call:</strong> +60 17-5025973</div>
+      <div class="contact-row"><strong>Email:</strong> psp@gmail.edu.my</div>
+      <div class="contact-row"><strong>Address:</strong>
+        Politeknik Seberang Perai, Jalan Permatang Pauh, 13500 Permatang Pauh, Pulau Pinang, Malaysia
+      </div>
+    </div>
+
+    <!-- SOCIALS -->
+    <div class="socials">
+      <div class="social" id="fb"><i class="fa-brands fa-facebook"></i> Add Us on Facebook</div>
+      <div class="social" id="tw"><i class="fa-brands fa-twitter"></i> Add Us on Twitter</div>
+      <div class="social" id="ig"><i class="fa-brands fa-instagram"></i> Add Us on Instagram</div>
+    </div>
+
+  </div>
+
+  <!-- jQuery interactions -->
+  <script>
+    $(document).ready(function(){
+      // 1) Animate the logo when page loads
+      $("#logo").hide().fadeIn(1200);
+
+      // 2) Hover effect on nav buttons (change background & scale)
+      $(".nav-button").hover(function(){
+        $(this).css({
+          "background-color":"#e8f2ff",
+          "transform":"translateY(-3px)",
+          "box-shadow":"0 6px 12px rgba(0,0,0,0.06)"
+        });
+      }, function(){
+        $(this).css({
+          "background-color":"",
+          "transform":"",
+          "box-shadow":""
+        });
+      });
+
+      // 3) Click event to show/hide contact details
+      $("#toggle-contact").click(function(){
+        $("#contact-details").slideToggle(400);
+      });
+
+      // 4) Animate social icons on hover (increase slightly)
+      $(".social").hover(function(){
+        $(this).animate({ paddingLeft: "16px" , paddingRight: "16px" }, 120);
+      }, function(){
+        $(this).animate({ paddingLeft: "8px" , paddingRight: "8px" }, 120);
+      });
+
+      // (optional) clicking nav items scrolls / focuses
+      $("#contactNav").click(function(){
+        $("html,body").animate({ scrollTop: $("#contact-details").offset().top - 20 }, 400);
+        // ensure details visible
+        if($("#contact-details").is(":hidden")) $("#contact-details").slideDown(350);
+      });
+    });
+  </script>
+</body>
+</html>
